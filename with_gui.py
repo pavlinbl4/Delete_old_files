@@ -2,6 +2,7 @@ import os
 from datetime import datetime, timedelta
 import tkinter as tk
 from tkinter import filedialog
+from tkinter import messagebox
 
 
 def delete_files_older_than(dir_path, extension, days):
@@ -68,7 +69,7 @@ def main():
 
     dir_button = tk.Button(root, text="Выбрать", command=select_dir)
     dir_button.grid(row=0, column=2, padx=10, pady=10)
-a
+
     # Кнопка для удаления файлов
     def delete_files():
         dir_path = dir_entry.get()
@@ -87,15 +88,14 @@ a
     # Функция для показа сообщения с перечнем удаленных файлов
     def show_message(deleted_files):
         message = "Удаленные файлы:\n" + "\n".join(deleted_files)
-        tk.messagebox.showinfo("Удаленные файлы", message)
-
+        messagebox.showinfo("Удаленные файлы", message)
     root.mainloop()
 
     # Задержка перед закрытием окна (например, 2 секунды)
     close_timeout = 2
 
     # Запуск функции закрытия через определенное время
-    # root.after(close_timeout * 1000, close_window)
+    root.after(close_timeout * 1000, close_window)
 
 
 if __name__ == "__main__":
