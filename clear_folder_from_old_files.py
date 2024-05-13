@@ -29,10 +29,11 @@ def delete_old_files(directory, extensions, days):
         for file in files:
             modified_date = datetime.fromtimestamp(os.path.getmtime(file))
             if modified_date < cutoff_date:
-                os.remove(file)
-                logger.info(f"Удален файл: {file}")
-                count += 1
-                # print(f"Удален файл: {file}")
+                if os.path.isfile(file):
+                    os.remove(file)
+                    logger.info(f"Удален файл: {file}")
+                    count += 1
+
         time.sleep(1)  # Задержка в 1 секунду для визуализации
     logger.info(f"{count} files were deleted")
 
