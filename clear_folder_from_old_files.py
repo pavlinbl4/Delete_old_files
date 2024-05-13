@@ -4,7 +4,6 @@ import time
 from datetime import datetime, timedelta
 from loguru import logger
 
-
 # Получаем путь к директории скрипта
 script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
 log_file_path = os.path.join(script_dir, "deleted_from_downloads_files.log")
@@ -26,7 +25,7 @@ def delete_old_files(directory, extensions, days):
     cutoff_date = datetime.now() - timedelta(days=days)
     count = 0
     for ext in extensions:
-        files = [os.path.join(directory, f) for f in os.listdir(directory) if f.endswith(ext)]
+        files = [os.path.join(directory, f) for f in os.listdir(directory) if f.endswith(ext.lower())]
         for file in files:
             modified_date = datetime.fromtimestamp(os.path.getmtime(file))
             if modified_date < cutoff_date:
@@ -39,4 +38,17 @@ def delete_old_files(directory, extensions, days):
 
 
 if __name__ == '__main__':
-    delete_old_files('/Volumes/big4photo/Downloads', ['pdf', 'xlsx', 'doc', 'docx', 'bz2', 'txt', 'png'], 1)
+    delete_old_files('/Volumes/big4photo/Downloads', [
+        'pdf',
+        'xlsx',
+        'doc',
+        'docx',
+        'bz2',
+        'txt',
+        'png',
+        'jpg',
+        'jpeg',
+        'PDF',
+        'docx',
+        'JPG'
+    ], 1)
